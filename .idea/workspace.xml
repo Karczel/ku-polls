@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1cce53d-ed4b-464a-a085-ff4a2965f126" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data/polls-v1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mysite/data/polls.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/mysite/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/mysite/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/mysite/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/mysite/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/mysite/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/static/polls/images/background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/static/polls/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/templates/polls/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/templates/polls/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/templates/polls/results.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/polls/views.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,16 +31,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/karczel/Github/RPG-Template/ku-polls/mysite",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/karczel/Github/RPG-Template/ku-polls/mysite&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/mysite" />
