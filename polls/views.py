@@ -1,8 +1,9 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect,Http404
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib import messages
 
 from .models import Choice, Question
 
@@ -40,6 +41,14 @@ class DetailView(generic.DetailView):
 
         return context
 
+    def get(self, request, *args, **kwargs):
+        try:
+            question = get_object_or_404(Question, pk=kwargs['pk'])
+        except Http404:
+            messages.error(request, "There is no Question with this ID")
+            return HttpResponseRedirect(reverse('polls:index'))
+        return super().get(request, *args, **kwargs)
+
 
 class ResultsView(generic.DetailView):
     model = Question
@@ -48,10 +57,15 @@ class ResultsView(generic.DetailView):
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+
+    if not question.can_vote():
+        messages.error(request, "Voting is closed.")
+        return HttpResponseRedirect(reverse('polls:index'))
+
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
+        # Redisplay the question voting form. with an error message.
         return render(request, 'polls/detail.html', {
             'question': question,
             'error_message': "You didn't select a choice.",
@@ -60,6 +74,6 @@ def vote(request, question_id):
         selected_choice.votes += 1
         selected_choice.save()
         # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from beใใใสing posted twice if a
+        # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))

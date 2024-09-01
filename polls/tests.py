@@ -68,7 +68,7 @@ class QuestionModelTests(TestCase):
         can_vote() returns True for questions whose pub_date
         is in the past
         and end_date
-        is in the future
+        is in the future.
         """
         now = timezone.now()
         question = Question(pub_date=now - timezone.timedelta(days=1), end_date=now + timezone.timedelta(days=1))
@@ -78,7 +78,7 @@ class QuestionModelTests(TestCase):
     def test_can_vote_with_future_pub_date(self):
         """
         can_vote() returns False for questions whose pub_date
-        is in the future
+        is in the future.
         """
         now = timezone.now()
         future_question = Question(pub_date=now + timezone.timedelta(days=1),
@@ -91,7 +91,7 @@ class QuestionModelTests(TestCase):
         can_vote() returns True for questions whose pub_date
         is in the past
         and end_date
-        is NULL
+        is None.
         """
         now = timezone.now()
         no_end_date_question = Question(pub_date=now - timezone.timedelta(days=1), end_date=None)
@@ -101,7 +101,7 @@ class QuestionModelTests(TestCase):
     def test_can_vote_with_past_end_date(self):
         """
         can_vote() returns False for questions whose end_date
-        is in the past
+        is in the past.
         """
         now = timezone.now()
         past_question = Question(pub_date=now - timezone.timedelta(days=10), end_date=now - timezone.timedelta(days=1))
