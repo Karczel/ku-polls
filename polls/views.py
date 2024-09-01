@@ -33,6 +33,7 @@ class DetailView(generic.DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
     def get_context_data(self, **kwargs):
+        """Apply is_published and can_vote methods"""
         context = super().get_context_data(**kwargs)
         question = self.object
 
@@ -42,6 +43,8 @@ class DetailView(generic.DetailView):
         return context
 
     def get(self, request, *args, **kwargs):
+        """If you cannot get page at Question Index,
+        get_object_or_404() will raise Http404 error"""
         try:
             get_object_or_404(Question, pk=kwargs['pk'])
         except Http404:
