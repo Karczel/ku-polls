@@ -1,5 +1,5 @@
-from django.http import HttpResponseRedirect,Http404
-from django.shortcuts import get_object_or_404, render, redirect
+from django.http import HttpResponseRedirect, Http404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
@@ -32,7 +32,7 @@ class DetailView(generic.DetailView):
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         question = self.object
 
@@ -43,7 +43,7 @@ class DetailView(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         try:
-            question = get_object_or_404(Question, pk=kwargs['pk'])
+            get_object_or_404(Question, pk=kwargs['pk'])
         except Http404:
             messages.error(request, "There is no Question with this ID")
             return HttpResponseRedirect(reverse('polls:index'))
@@ -76,4 +76,7 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+        return HttpResponseRedirect(
+            reverse(
+                'polls:results',
+                args=(question.id,)))

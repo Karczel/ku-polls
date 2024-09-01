@@ -14,11 +14,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='question',
             name='end_date',
-            field=models.DateTimeField(blank=True, null=True, verbose_name='end date'),
+            field=models.DateTimeField(
+                blank=True,
+                null=True,
+                verbose_name='end date'),
         ),
         migrations.AlterField(
             model_name='question',
             name='pub_date',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='date published'),
+            field=models.DateTimeField(
+                default=django.utils.timezone.now,
+                verbose_name='date published'),
         ),
     ]
