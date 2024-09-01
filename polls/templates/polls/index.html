@@ -1,10 +1,20 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+
+{% if messages %}
+    <h2 class="messages">
+        {% for message in messages %}
+            <p style="color:red;" class="{{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+    </h2>
+{% endif %}
 {% if latest_question_list %}
-    <ul>
+    <ul style="list-style-type: none; padding: 0; margin: 0;">
     {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
+            - <a href="{% url 'polls:results' question.id %}">Results</a>
+        </li>
     {% endfor %}
     </ul>
 {% else %}
