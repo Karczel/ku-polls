@@ -17,3 +17,5 @@
 {% else %}
     <p>This poll is not published yet</p>
 {% endif %}
+<a href="{% url 'polls:results' question.id %}">Results</a>
+<a href="{% url 'polls:index' %}">Back to List of Polls</a>
