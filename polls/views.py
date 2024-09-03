@@ -1,9 +1,14 @@
 from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
+
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Choice, Question
 
@@ -22,7 +27,8 @@ class IndexView(generic.ListView):
         ).order_by('-pub_date')[:5]
 
 
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.DetailView):
+    """Class based view for viewing a poll."""
     model = Question
     template_name = 'polls/detail.html'
 
@@ -57,8 +63,17 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
-
+@login_required
 def vote(request, question_id):
+    """Vote for a choice on a question (poll)."""
+    user = request.user
+    if not user.is_authenticated:
+        # return redirect('login')
+        # or, so the user comes back here after login...
+        return redirect(f"{settings.LOGIN_URL}?next={request.path}")
+    else:
+        print("current user is", user.id, "login", user.username)
+        print("Real name:", user.first_name, user.last_name)
     question = get_object_or_404(Question, pk=question_id)
 
     if not question.can_vote():
@@ -83,3 +98,23 @@ def vote(request, question_id):
             reverse(
                 'polls:results',
                 args=(question.id,)))
+
+def signup(request):
+    """Register a new user."""
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # get named fields from the form data
+            username = form.cleaned_data.get('username')
+            # password input field is named 'password1'
+            raw_passwd = form.cleaned_data.get('password1')
+            user = authenticate(username=username,password=raw_passwd)
+            login(request, user)
+            return redirect('polls:index')
+        # what if form is not valid?
+        # we should display a message in signup.html
+    else:
+        # create a user form and display it the signup page
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})

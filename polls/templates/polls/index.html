@@ -9,6 +9,14 @@
         {% endfor %}
     </h2>
 {% endif %}
+{% if user.is_authenticated %}
+   Welcome back, {{ user.username }}
+   <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+   </form>{% else %}
+   Please <a href="{% url 'login' %}?next={{request.path}}">Login</a>
+{% endif %}
 {% if latest_question_list %}
     <ul style="list-style-type: none; padding: 0; margin: 0;">
     {% for question in latest_question_list %}
