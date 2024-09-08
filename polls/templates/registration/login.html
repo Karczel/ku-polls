@@ -18,6 +18,6 @@
   <!-- if your app redirects user to login before accessing some pages, then next contains return url -->
   <input type="hidden" name="next" value="{{next}}" />
 </form>
- {# If you have a sign-up page, then add a link here #}
+  <a href="{% url 'signup' %}">Sign up?</a>
 </body>
 </html>
