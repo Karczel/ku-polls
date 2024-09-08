@@ -34,52 +34,6 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
-def login_view(request):
-    """Handle user login."""
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        ip_addr = get_client_ip(request)
-        if user is not None:
-            login(request, user)
-            logger.info(f"User {username} logged in from {ip_addr}")
-            messages.success(request, "Login successful.")
-            return redirect('home')
-        else:
-            logger.warning(f"Failed login attempt for {username} from {ip_addr}")
-            messages.error(request, "Invalid login credentials.")
-
-def logout_view(request):
-    """Handle user logout."""
-    username = request.user.username if request.user.is_authenticated else 'Unknown'
-    ip_addr = get_client_ip(request)
-    logout(request)
-    logger.info(f"User {username} logged out from {ip_addr}")
-
-def vote_view(request, question_id):
-    """Handle voting on a question."""
-    question = get_object_or_404(Question, pk=question_id)
-    selected_choice_id = request.POST.get('choice')
-    user = request.user
-    ip_addr = get_client_ip(request)
-
-    if selected_choice_id:
-        selected_choice = get_object_or_404(Choice, pk=selected_choice_id)
-        existing_vote = Vote.objects.filter(user=user, choice__question=question).first()
-        if existing_vote:
-            if existing_vote.choice != selected_choice:
-                existing_vote.delete()
-                Vote.objects.create(user=user, choice=selected_choice)
-                logger.info(f"User {user.username} changed their vote to choice {selected_choice.choice_text} from IP {ip_addr}")
-        else:
-            Vote.objects.create(user=user, choice=selected_choice)
-            logger.info(f"User {user.username} voted for choice {selected_choice.choice_text} from IP {ip_addr}")
-
-        messages.success(request, f"Your vote for '{selected_choice.choice_text}' was successfully recorded.")
-    else:
-        messages.error(request, "You didn't select a choice.")
-
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
