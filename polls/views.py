@@ -10,7 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Choice, Question
+from .models import Choice, Question, Vote
 
 # messages.set_level(request, messages.DEBUG )
 # or, reset it to the default
@@ -96,14 +96,20 @@ def vote(request, question_id):
         return render(request, 'polls/detail.html', {
             'question': question,
         })
+
+    existing_vote = Vote.objects.filter(user=user, choice__question=question).first()
+    if existing_vote:
+        if existing_vote.choice != selected_choice:
+            existing_vote.delete()
+            current_vote = Vote.objects.create(user=user, choice=selected_choice)
     else:
-        selected_choice.votes += 1
-        selected_choice.save()
+        current_vote = Vote.objects.create(user=user, choice=selected_choice)
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        messages.success(request, "Your vote was successfully recorded.")
-        return HttpResponseRedirect(
+    current_vote.save()
+    messages.success(request, "Your vote was successfully recorded.")
+    return HttpResponseRedirect(
             reverse(
                 'polls:results',
                 args=(question.id,)))
