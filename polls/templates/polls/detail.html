@@ -2,6 +2,15 @@
 
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
+{% if user.is_authenticated %}
+   Welcome back, {{ user.username }}
+   <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+   </form>{% else %}
+   Please <a href="{% url 'login' %}?next={{request.path}}">Login</a>
+{% endif %}
+
 {% if messages %}
     <h2 class="messages">
         {% for message in messages %}
@@ -9,6 +18,7 @@
         {% endfor %}
     </h2>
 {% endif %}
+
 {% if can_vote %}
     <form action="{% url 'polls:vote' question.id %}" method="post">
     {% csrf_token %}
@@ -16,8 +26,12 @@
         <legend><h1>{{ question.question_text }}</h1></legend>
        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
        {% for choice in question.choice_set.all %}
-           <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-           <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"
+                {% if choice == previous_choice %} checked {% endif %}>
+            <label for="choice{{ forloop.counter }}"
+                {% if choice == previous_choice %} class="highlight" {% endif %}>
+                {{ choice.choice_text }}
+            </label><br>
        {% endfor %}
     </fieldset>
     <input type="submit" value="Vote">

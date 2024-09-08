@@ -2,10 +2,19 @@
 
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
+{% if user.is_authenticated %}
+   Welcome back, {{ user.username }}
+   <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+   </form>{% else %}
+   Please <a href="{% url 'login' %}?next={{request.path}}">Login</a>
+{% endif %}
+
 {% if messages %}
     <h2 class="messages">
         {% for message in messages %}
-            <p style="color:red;" class="{{ message.tags }}">{{ message }}</p>
+            <p style="color:green;" class="{{ message.tags }}">{{ message }}</p>
         {% endfor %}
     </h2>
 {% endif %}

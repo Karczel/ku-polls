@@ -50,9 +50,13 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
         """Apply is_published and can_vote methods"""
         context = super().get_context_data(**kwargs)
         question = self.object
+        user = self.request.user
 
         context['is_published'] = question.is_published()
         context['can_vote'] = question.can_vote()
+
+        user_vote = Vote.objects.filter(user=user, choice__question=question).first()
+        context['previous_choice'] = user_vote.choice if user_vote else None
 
         return context
 
