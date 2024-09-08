@@ -1,0 +1,188 @@
+[
+{
+  "model": "polls.question",
+  "pk": 2,
+  "fields": {
+    "question_text": "What food are you allergic to?",
+    "pub_date": "2024-08-25T01:47:21Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 3,
+  "fields": {
+    "question_text": "Where do you usually spend your break time in KU?",
+    "pub_date": "2024-08-25T01:48:38Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 13,
+  "fields": {
+    "question": 2,
+    "choice_text": "Dairy"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 14,
+  "fields": {
+    "question": 2,
+    "choice_text": "Peanuts"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 15,
+  "fields": {
+    "question": 2,
+    "choice_text": "Seafood"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 16,
+  "fields": {
+    "question": 2,
+    "choice_text": "Egg"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 17,
+  "fields": {
+    "question": 2,
+    "choice_text": "Soy"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 18,
+  "fields": {
+    "question": 2,
+    "choice_text": "Wheat"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 19,
+  "fields": {
+    "question": 2,
+    "choice_text": "Sesame"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 20,
+  "fields": {
+    "question": 2,
+    "choice_text": "Fish"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 21,
+  "fields": {
+    "question": 2,
+    "choice_text": "Tree nuts, such as walnuts"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 22,
+  "fields": {
+    "question": 3,
+    "choice_text": "Stadium"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 23,
+  "fields": {
+    "question": 3,
+    "choice_text": "Chulabhorn Walailak Swimming Pool"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 24,
+  "fields": {
+    "question": 3,
+    "choice_text": "Kasetsart Engineering Fit & Firm (KEFF)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 25,
+  "fields": {
+    "question": 3,
+    "choice_text": "KU Health Fitness Center (Soon Keelah)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 26,
+  "fields": {
+    "question": 3,
+    "choice_text": "KU Happy Place Center"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 27,
+  "fields": {
+    "question": 3,
+    "choice_text": "KU Canteen 1 (Bar Mai gwa)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 28,
+  "fields": {
+    "question": 3,
+    "choice_text": "KU Canteen 2 (Bar Mai)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 29,
+  "fields": {
+    "question": 3,
+    "choice_text": "KU AVENUE"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 30,
+  "fields": {
+    "question": 3,
+    "choice_text": "The Office of Computer Services (OCS)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 31,
+  "fields": {
+    "question": 3,
+    "choice_text": "Other"
+  }
+},
+{
+  "model": "polls.vote",
+  "pk": 7,
+  "fields": {
+    "user": 1,
+    "choice": 30
+  }
+},
+{
+  "model": "polls.vote",
+  "pk": 18,
+  "fields": {
+    "user": 2,
+    "choice": 22
+  }
+}
+]
