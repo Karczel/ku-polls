@@ -3,9 +3,19 @@ import datetime
 from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib import messages
 
 from .models import Question
 
+# verify a message was set
+# response = client.post(url, post_data)
+# request = response.request
+#
+# storage = messages.get_messages(request)
+# for message in storage:
+#     print(message.message)
+#     print(message.tags)
+#     print(message.level)
 
 class QuestionModelTests(TestCase):
 
