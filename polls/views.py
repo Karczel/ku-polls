@@ -23,6 +23,63 @@ from .models import Choice, Question, Vote
 # messages.info(request, "Your vote was recorded", extra_tags='alert')
 
 
+logger = logging.getLogger('polls')
+
+def get_client_ip(request):
+    """Get the visitor’s IP address using request headers."""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+def login_view(request):
+    """Handle user login."""
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        ip_addr = get_client_ip(request)
+        if user is not None:
+            login(request, user)
+            logger.info(f"User {username} logged in from {ip_addr}")
+            messages.success(request, "Login successful.")
+            return redirect('home')
+        else:
+            logger.warning(f"Failed login attempt for {username} from {ip_addr}")
+            messages.error(request, "Invalid login credentials.")
+
+def logout_view(request):
+    """Handle user logout."""
+    username = request.user.username if request.user.is_authenticated else 'Unknown'
+    ip_addr = get_client_ip(request)
+    logout(request)
+    logger.info(f"User {username} logged out from {ip_addr}")
+
+def vote_view(request, question_id):
+    """Handle voting on a question."""
+    question = get_object_or_404(Question, pk=question_id)
+    selected_choice_id = request.POST.get('choice')
+    user = request.user
+    ip_addr = get_client_ip(request)
+
+    if selected_choice_id:
+        selected_choice = get_object_or_404(Choice, pk=selected_choice_id)
+        existing_vote = Vote.objects.filter(user=user, choice__question=question).first()
+        if existing_vote:
+            if existing_vote.choice != selected_choice:
+                existing_vote.delete()
+                Vote.objects.create(user=user, choice=selected_choice)
+                logger.info(f"User {user.username} changed their vote to choice {selected_choice.choice_text} from IP {ip_addr}")
+        else:
+            Vote.objects.create(user=user, choice=selected_choice)
+            logger.info(f"User {user.username} voted for choice {selected_choice.choice_text} from IP {ip_addr}")
+
+        messages.success(request, f"Your vote for '{selected_choice.choice_text}' was successfully recorded.")
+    else:
+        messages.error(request, "You didn't select a choice.")
+
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
@@ -68,6 +125,7 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
         try:
             get_object_or_404(Question, pk=kwargs['pk'])
         except Http404:
+            logger.error("Invalid page exception")
             messages.error(request, "There is no Question with this ID")
             return HttpResponseRedirect(reverse('polls:index'))
         return super().get(request, *args, **kwargs)
@@ -81,6 +139,8 @@ class ResultsView(generic.DetailView):
 def vote(request, question_id):
     """Vote for a choice on a question (poll)."""
     user = request.user
+    ip_addr = get_client_ip(request)
+
     if not user.is_authenticated:
         # return redirect('login')
         # or, so the user comes back here after login...
@@ -98,6 +158,7 @@ def vote(request, question_id):
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form. with an error message.
+        logger.error(f"{user.username} from {ip_addr} didn't choose a vote")
         messages.error(request, "You didn't select a choice.")
         return render(request, 'polls/detail.html', {
             'question': question,
@@ -115,6 +176,7 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
+    logger.info(f"{user.username} from {ip_addr} submits vote {selected_choice.choice_text} in {question.question_text}.")
     messages.success(request, f"Your vote for '{question}' was successfully recorded.")
     return HttpResponseRedirect(
             reverse(
@@ -133,6 +195,7 @@ def signup(request):
             raw_passwd = form.cleaned_data.get('password1')
             user = authenticate(username=username,password=raw_passwd)
             login(request, user)
+            logger.info(f"{user.username} successfully logged in")
             return redirect('polls:index')
         # what if form is not valid?
         # we should display a message in signup.html
@@ -140,67 +203,5 @@ def signup(request):
             messages.error(request,"This form is invalid")
     else:
         # create a user form and display it the signup page
-
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
-
-def get_client_ip(request):
-    """Get the visitor’s IP address using request headers."""
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
-
-logger = logging.getLogger('polls')
-
-def login_view(request):
-    """Handle user login."""
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        ip_addr = get_client_ip(request)
-        if user is not None:
-            login(request, user)
-            logger.info(f"User {username} logged in from {ip_addr}")
-            messages.success(request, "Login successful.")
-            return redirect('home')
-        else:
-            logger.warning(f"Failed login attempt for {username} from {ip_addr}")
-            messages.error(request, "Invalid login credentials.")
-    return render(request, 'login.html')
-
-def logout_view(request):
-    """Handle user logout."""
-    username = request.user.username if request.user.is_authenticated else 'Unknown'
-    ip_addr = get_client_ip(request)
-    logout(request)
-    logger.info(f"User {username} logged out from {ip_addr}")
-    return redirect('login')
-
-def vote_view(request, question_id):
-    """Handle voting on a question."""
-    question = get_object_or_404(Question, pk=question_id)
-    selected_choice_id = request.POST.get('choice')
-    user = request.user
-    ip_addr = get_client_ip(request)
-
-    if selected_choice_id:
-        selected_choice = get_object_or_404(Choice, pk=selected_choice_id)
-        existing_vote = Vote.objects.filter(user=user, choice__question=question).first()
-        if existing_vote:
-            if existing_vote.choice != selected_choice:
-                existing_vote.delete()
-                Vote.objects.create(user=user, choice=selected_choice)
-                logger.info(f"User {user.username} changed their vote to choice {selected_choice.choice_text} from IP {ip_addr}")
-        else:
-            Vote.objects.create(user=user, choice=selected_choice)
-            logger.info(f"User {user.username} voted for choice {selected_choice.choice_text} from IP {ip_addr}")
-
-        messages.success(request, f"Your vote for '{selected_choice.choice_text}' was successfully recorded.")
-    else:
-        messages.error(request, "You didn't select a choice.")
-
-    return redirect('polls:results', question_id=question_id)

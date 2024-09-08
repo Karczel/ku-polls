@@ -178,11 +178,6 @@ LOGGING = {
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
         'polls': {
             'handlers': ['console', 'file'],
             'level': 'INFO',
