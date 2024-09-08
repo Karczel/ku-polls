@@ -102,13 +102,14 @@ def vote(request, question_id):
         if existing_vote.choice != selected_choice:
             existing_vote.delete()
             current_vote = Vote.objects.create(user=user, choice=selected_choice)
+            current_vote.save()
     else:
         current_vote = Vote.objects.create(user=user, choice=selected_choice)
+        current_vote.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-    current_vote.save()
-    messages.success(request, "Your vote was successfully recorded.")
+    messages.success(request, f"Your vote for '{question}' was successfully recorded.")
     return HttpResponseRedirect(
             reverse(
                 'polls:results',
