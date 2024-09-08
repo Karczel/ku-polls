@@ -5,7 +5,9 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
 
-from django.contrib.auth import login, authenticate
+import logging
+
+from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -134,7 +136,71 @@ def signup(request):
             return redirect('polls:index')
         # what if form is not valid?
         # we should display a message in signup.html
+        else:
+            messages.error(request,"This form is invalid")
     else:
         # create a user form and display it the signup page
+
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+def get_client_ip(request):
+    """Get the visitor’s IP address using request headers."""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+logger = logging.getLogger('polls')
+
+def login_view(request):
+    """Handle user login."""
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        ip_addr = get_client_ip(request)
+        if user is not None:
+            login(request, user)
+            logger.info(f"User {username} logged in from {ip_addr}")
+            messages.success(request, "Login successful.")
+            return redirect('home')
+        else:
+            logger.warning(f"Failed login attempt for {username} from {ip_addr}")
+            messages.error(request, "Invalid login credentials.")
+    return render(request, 'login.html')
+
+def logout_view(request):
+    """Handle user logout."""
+    username = request.user.username if request.user.is_authenticated else 'Unknown'
+    ip_addr = get_client_ip(request)
+    logout(request)
+    logger.info(f"User {username} logged out from {ip_addr}")
+    return redirect('login')
+
+def vote_view(request, question_id):
+    """Handle voting on a question."""
+    question = get_object_or_404(Question, pk=question_id)
+    selected_choice_id = request.POST.get('choice')
+    user = request.user
+    ip_addr = get_client_ip(request)
+
+    if selected_choice_id:
+        selected_choice = get_object_or_404(Choice, pk=selected_choice_id)
+        existing_vote = Vote.objects.filter(user=user, choice__question=question).first()
+        if existing_vote:
+            if existing_vote.choice != selected_choice:
+                existing_vote.delete()
+                Vote.objects.create(user=user, choice=selected_choice)
+                logger.info(f"User {user.username} changed their vote to choice {selected_choice.choice_text} from IP {ip_addr}")
+        else:
+            Vote.objects.create(user=user, choice=selected_choice)
+            logger.info(f"User {user.username} voted for choice {selected_choice.choice_text} from IP {ip_addr}")
+
+        messages.success(request, f"Your vote for '{selected_choice.choice_text}' was successfully recorded.")
+    else:
+        messages.error(request, "You didn't select a choice.")
+
+    return redirect('polls:results', question_id=question_id)

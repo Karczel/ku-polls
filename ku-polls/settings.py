@@ -150,3 +150,43 @@ LOGOUT_REDIRECT_URL = 'login'       # after logout, return to login page
 
 SESSION_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+LOGGING = {
+    "version": 1,  # the dictConfig format version
+    "disable_existing_loggers": False,  # retain the default loggers
+    'formatters': {
+        'verbose': {
+            "format": "{name} {levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'polls.log',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'polls': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
