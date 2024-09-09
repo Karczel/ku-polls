@@ -6,6 +6,8 @@ from django.utils import timezone
 from django.contrib import messages
 
 import logging
+from django.contrib.auth.signals import user_logged_in, user_logged_out, user_login_failed
+from django.dispatch import receiver
 
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.forms import UserCreationForm
@@ -159,3 +161,30 @@ def signup(request):
         # create a user form and display it the signup page
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
+@receiver(user_logged_in)
+def user_logged_in_callback(sender, request, user, **kwargs):
+    # to cover more complex cases:
+    # http://stackoverflow.com/questions/4581789/how-do-i-get-user-ip-address-in-django
+    ip_addr = get_client_ip(request)
+
+    logger.info('login user: {user} via ip: {ip}'.format(
+        user=user,
+        ip=ip_addr
+    ))
+
+@receiver(user_logged_out)
+def user_logged_out_callback(sender, request, user, **kwargs):
+    ip_addr = get_client_ip(request)
+
+    logger.info('logout user: {user} via ip: {ip}'.format(
+        user=user,
+        ip=ip_addr
+    ))
+
+@receiver(user_login_failed)
+def user_login_failed_callback(sender, credentials, **kwargs):
+    logger.warning('login failed for: {credentials}'.format(
+        credentials=credentials,
+    ))
