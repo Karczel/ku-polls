@@ -1,3 +1,4 @@
+"""Unit test for Index"""
 import datetime
 
 from django.test import TestCase
