@@ -1,0 +1,38 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$8E1WSCypez5I3FZbI1lru3$hSbhiNTLJ/B5T0W5t30rztakHC0xyaPwFXPAZKA7dBU=",
+    "last_login": "2024-09-08T07:07:13.197Z",
+    "is_superuser": false,
+    "username": "harry",
+    "first_name": "Harry",
+    "last_name": "",
+    "email": "harry@hackerone.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-09-03T08:02:50.340Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$osEYIcMifuJv4SCHTJkwmZ$2et4xwj53GAzv9ytmilLsI7LvoUz074SYcB4+Ps3P9k=",
+    "last_login": "2024-09-08T15:10:51.359Z",
+    "is_superuser": false,
+    "username": "Kar",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-09-03T09:33:50.481Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

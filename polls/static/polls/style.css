@@ -40,3 +40,8 @@ tr:hover {
 .result-item:last-child {
     border-bottom: none;
 }
+
+.highlight {
+    color: blue;
+    font-weight: bold;
+}
