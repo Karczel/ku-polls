@@ -1,6 +1,11 @@
 body {
-    background: white url("images/background.png") no-repeat;
+    background-color: white !important;
+    background-image: url("images/background1.png") !important;
+    background-size: auto 100vh; /* Fit the height while keeping the aspect ratio */
+    background-position: center;
+    background-repeat: repeat-x;
 }
+
 
 table {
     width: 100%;
