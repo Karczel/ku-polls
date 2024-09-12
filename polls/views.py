@@ -18,14 +18,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Choice, Question, Vote
 
-# messages.set_level(request, messages.DEBUG )
-# or, reset it to the default
-# messages.set_level( request, None )
-
-# CRITICAL = 50
-# messages.add_message(request, CRITICAL, "Database error occurred.")
-# messages.info(request, "Your vote was recorded", extra_tags='alert')
-
+from ku_polls import settings
 
 logger = logging.getLogger('polls')
 
@@ -70,7 +63,7 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         """Apply is_published and can_vote methods."""
         context = super().get_context_data(**kwargs)
-        question = self.object
+        question = self.get_object()
         user = self.request.user
 
         context['is_published'] = question.is_published()
@@ -82,13 +75,19 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
         return context
 
     def get(self, request, *args, **kwargs):
-        """If you cannot get page at Question Index, get_object_or_404() will raise Http404 error."""
+        """If you cannot get page at Question Index, get_object_or_404() will raise Http404 error.
+        If you got into questions you're not allowed to vote yet, you'll be redirected to index page."""
         try:
-            get_object_or_404(Question, pk=kwargs['pk'])
+            question = get_object_or_404(Question, pk=kwargs['pk'])
+            if not question.can_vote():
+                logger.debug(f"Poll '{question.question_text}' is not open for voting.")
+                messages.info(request, f"'{question.question_text}' poll is not open for voting.")
+                return HttpResponseRedirect(reverse('polls:index'))
         except Http404:
             logger.error("Invalid page exception")
             messages.error(request, "There is no Question with this ID")
             return HttpResponseRedirect(reverse('polls:index'))
+
         return super().get(request, *args, **kwargs)
 
 

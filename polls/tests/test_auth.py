@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate  # to "login" a user using code
 from polls.models import Question, Choice
-from mysite import settings
+from ku_polls import settings
 
 
 class UserAuthTest(django.test.TestCase):

@@ -9,7 +9,7 @@ class Question(models.Model):
     """Question model."""
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published', default=timezone.now)
-    end_date = models.DateTimeField('end date', null=True, blank=True)
+    end_date = models.DateTimeField('end date', default=None, null=True, blank=True)
 
     def __str__(self):
         """Return the string representation of Question class."""
