@@ -1,3 +1,7 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+
 <html>
 <body>
 <h2>Login</h2>
@@ -18,6 +22,7 @@
   <!-- if your app redirects user to login before accessing some pages, then next contains return url -->
   <input type="hidden" name="next" value="{{next}}" />
 </form>
-  <a href="{% url 'signup' %}">Sign up?</a>
+  <a href="{% url 'signup' %}" class="custom-button-link">Sign up?</a> <br>
+  <a href="{% url 'polls:index' %}" class="custom-button-link">Return as a visitor</a>
 </body>
 </html>

@@ -1,3 +1,8 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+
+
 <h2>Register</h2>
 {% if messages %}
     <h2 class="messages">
@@ -17,3 +22,5 @@
     </tr>
     </table>
 </form>
+  <a href="{% url 'login' %}?next={{request.path}}" class="custom-button-link">Log in</a> <br>
+  <a href="{% url 'polls:index' %}" class="custom-button-link">Return as a visitor</a>
