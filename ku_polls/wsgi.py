@@ -1,5 +1,5 @@
 """
-WSGI config for ku-polls project.
+WSGI config for ku_polls project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ku-polls.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ku_polls.settings')
 
 application = get_wsgi_application()
