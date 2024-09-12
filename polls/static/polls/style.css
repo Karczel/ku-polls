@@ -3,9 +3,90 @@ body {
     background-image: url("images/background1.png") !important;
     background-size: auto 100vh; /* Fit the height while keeping the aspect ratio */
     background-position: center;
-    background-repeat: repeat-x;
+    background-repeat: repeat;
 }
 
+.header-background {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            padding-bottom: 0.5px;
+            border-radius: 5px;
+            margin: -10px;
+            margin-bottom: 20px;
+}
+
+.header-background a {
+            color: #1e90ff;
+            text-decoration: none;
+}
+
+.header-background a:hover {
+            color: #63a4ff;
+}
+
+fieldset {
+    position: relative; /* Ensure the pseudo-element is positioned relative to the fieldset */
+    padding: 50px; /* Adjust padding as needed */
+    border: 1px solid #ccc;
+    background: transparent;
+}
+
+fieldset::before {
+    content: ""; /* Required for pseudo-elements */
+    position: absolute; /* Position it absolutely within the fieldset */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 1; /* Ensure the overlay is above the background but below the content */
+}
+
+fieldset > * {
+    position: relative; /* Ensure the content is above the pseudo-element */
+    z-index: 2; /* Ensure the content is above the overlay */
+}
+
+.scrollable-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 0 150px;
+    margin: 0 auto;
+    list-style: none;
+}
+
+.box {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    align-items: center;
+    text-align: center;
+}
+
+.box a {
+    color: #7800ff;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+
+.box a:hover {
+    color: #3800b3;
+}
+
+
+a {
+    color: white;
+    text-decoration: none;
+}
 
 table {
     width: 100%;
@@ -21,6 +102,10 @@ th, td {
 
 th {
     background-color: #f4f4f4;
+}
+
+td {
+    background-color: #c4a7f5;
 }
 
 tr:nth-child(even) {
@@ -49,4 +134,44 @@ tr:hover {
 .highlight {
     color: blue;
     font-weight: bold;
+}
+
+.custom-container {
+    width: fit-content;
+    margin: 0px auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #7800ff !important;
+    color: white !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    border-radius: 5px !important;
+    font-weight: bold !important;
+    font-size: 16px !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.custom-button-link:hover {
+            background-color: #3800b3 !important;
+}
+
+input[type="submit"] {
+    background-color: #7800ff;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #3800b3;
 }
