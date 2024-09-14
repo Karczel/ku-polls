@@ -6,12 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  SECRET_KEY: myojHghDs5V99Z2dgA9EyU6s4ipDUQCLddBJtKmgiPixY8rBlvdV1k4F9UeJ4t3JRkA
-  DEBUG: True
-  ALLOWED_HOSTS: localhost
-  TIME_ZONE: UTC
-
 jobs:
   build:
 
@@ -31,6 +25,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Set up environment
+      run: |
+        cp sample.env .env
+        SECRET_KEY=$(python -c "import secrets; print(secrets.toen_urlsafe(50)")
+        echo "SECRET_KEY=${SECRET_KEY}" >> .env
+
     - name: Run Tests
       run: |
         python manage.py test
