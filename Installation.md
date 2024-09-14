@@ -26,8 +26,17 @@ For Windows:
 pip install -r requirements.txt
 ```
 ## 6. Create your own .env file
-In the sample.env file, we have provided everything necessary to run the file,
-So you can copy that right into your .env file
+In the `sample.env` file, we have provided everything necessary to run the file,
+So you can duplicate and rename it to `.env`
+### To create a .env file in terminal
+For Mac/Linux:
+```commandline
+cp sample.env .env
+```
+For windows:
+```commandline
+copy sample.env .env
+```
 However, if you want to generate your own SECRET_KEY, here is how you could do it:
 ```commandline
 import secrets
@@ -40,9 +49,14 @@ print(secrets.token_urlsafe(50))
 python manage.py migrate
 ```
 
-## 8. Load data
+## 8. Run tests
+```commandline
+python manage.py test
+```
+
+## 9. Load data
 ```commandline
 python3 manage.py loaddata data/polls-v4.json data/votes-v4.json data/users.json
 ```
 
-## 9. [Run](Running.md)
+## 10. [Run the web application](Running.md)
