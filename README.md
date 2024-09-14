@@ -1,3 +1,4 @@
+[![Django CI](https://github.com/Karczel/ku-polls/actions/workflows/django.yml/badge.svg)](https://github.com/Karczel/ku-polls/actions/workflows/django.yml)
 [![Unit test](https://github.com/Karczel/ku-polls/actions/workflows/unittest.yml/badge.svg)](https://github.com/Karczel/ku-polls/actions/workflows/unittest.yml)
 [![Check style with flake8](https://github.com/Karczel/ku-polls/actions/workflows/Style.yml/badge.svg)](https://github.com/Karczel/ku-polls/actions/workflows/Style.yml)
 
