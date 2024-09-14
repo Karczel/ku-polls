@@ -79,9 +79,13 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
         If you got into questions you're not allowed to vote yet, you'll be redirected to index page."""
         try:
             question = get_object_or_404(Question, pk=kwargs['pk'])
+            if not question.is_published():
+                logger.debug(f"Poll '{question.question_text}' is not opened yet.")
+                messages.info(request, f"'{question.question_text}' poll is not opened yet.")
+                return HttpResponseRedirect(reverse('polls:index'))
             if not question.can_vote():
-                logger.debug(f"Poll '{question.question_text}' is not open for voting.")
-                messages.info(request, f"'{question.question_text}' poll is not open for voting.")
+                logger.debug(f"Poll '{question.question_text}' is closed.")
+                messages.info(request, f"'{question.question_text}' poll is closed.")
                 return HttpResponseRedirect(reverse('polls:index'))
         except Http404:
             logger.error("Invalid page exception")

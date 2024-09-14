@@ -1,8 +1,10 @@
 import datetime
 
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib.messages import get_messages
 
 from polls.models import Question
 
@@ -61,8 +63,25 @@ def create_question(question_text, days):
 
 
 class QuestionDetailViewTests(TestCase):
+    """Unit test to test Detail View of question based on pub_date"""
+
+    def setUp(self):
+        """Creates a test user for unit test."""
+        super().setUp()
+        self.username = "testuser"
+        self.password = "FatChance!"
+        self.user1 = User.objects.create_user(
+            username=self.username,
+            password=self.password,
+            email="testuser@nowhere.com"
+        )
+        self.user1.first_name = "Tester"
+        self.user1.save()
+        self.client.login(username=self.username, password=self.password)
+
     def test_future_question(self):
-        """The detail view of a question with a pub_date in the future returns a 404 not found."""
+        """The detail view of a question with a pub_date in the future redirects to the polls index
+        with a warning on the index page."""
         future_question = \
             create_question(
                 question_text='Future question.',
@@ -70,10 +89,16 @@ class QuestionDetailViewTests(TestCase):
         url = reverse('polls:detail',
                       args=(future_question.id,))
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("polls:index"))
+
+        response = self.client.get(reverse('polls:index'))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(any(msg.message == future_question.question_text, msg.tags == 'DEBUG') for msg in messages)
 
     def test_past_question(self):
-        """The detail view of a question with a pub_date in the past displays the question's text."""
+        """The detail view of a question with a pub_date in the past displays the question's text
+        if the user is logged in."""
         past_question = \
             create_question(
                 question_text='Past Question.',
@@ -81,5 +106,6 @@ class QuestionDetailViewTests(TestCase):
         url = reverse('polls:detail',
                       args=(past_question.id,))
         response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response,
                             past_question.question_text)
