@@ -28,7 +28,7 @@ jobs:
     - name: Set up environment
       run: |
         cp sample.env .env
-        SECRET_KEY=$(python -c "import secrets; print(secrets.toen_urlsafe(50)")
+        SECRET_KEY=$(python -c "import secrets; print(secrets.toen_urlsafe(50))")
         echo "SECRET_KEY=${SECRET_KEY}" >> .env
 
     - name: Run Tests
