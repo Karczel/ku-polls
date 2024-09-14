@@ -1,8 +1,8 @@
-"""Tests of authentication."""
+"""Unit tests for user authentication."""
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate  # to "login" a user using code
+# from django.contrib.auth import authenticate  # to "login" a user using code
 from polls.models import Question, Choice
 from ku_polls import settings
 
@@ -11,8 +11,9 @@ class UserAuthTest(TestCase):
     """Unit test to test authentication."""
 
     def setUp(self):
-        """Creates a test user for unit test."""
-        # superclass setUp creates a Client object and initializes test database
+        """Set up the necessary variables for the unit test."""
+        # superclass setUp creates a Client object
+        # and initializes test database
         super().setUp()
         self.username = "testuser"
         self.password = "FatChance!"

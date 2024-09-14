@@ -1,3 +1,5 @@
+"""Django-compatible Models."""
+
 import datetime
 
 from django.db import models
@@ -7,9 +9,16 @@ from django.contrib.auth.models import User
 
 class Question(models.Model):
     """Question model."""
+
     question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published', default=timezone.now)
-    end_date = models.DateTimeField('end date', default=None, null=True, blank=True)
+    pub_date = models.DateTimeField(
+        'date published',
+        default=timezone.now)
+    end_date = models.DateTimeField(
+        'end date',
+        default=None,
+        null=True,
+        blank=True)
 
     def __str__(self):
         """Return the string representation of Question class."""
@@ -45,11 +54,13 @@ class Choice(models.Model):
 
     @property
     def votes(self):
-        """Return the number of votes for this choice"""
+        """Return the number of votes for this choice."""
         return Vote.objects.filter(choice=self).count()
 
+
 class Vote(models.Model):
-    """Vote model"""
+    """Vote model."""
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
 

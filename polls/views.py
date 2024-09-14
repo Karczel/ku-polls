@@ -8,10 +8,11 @@ from django.utils import timezone
 from django.contrib import messages
 
 import logging
-from django.contrib.auth.signals import user_logged_in, user_logged_out, user_login_failed
+from django.contrib.auth.signals import user_logged_in, \
+    user_logged_out, user_login_failed
 from django.dispatch import receiver
 
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -41,7 +42,9 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """
-        Return the last five published questions(not including those set to be published in the future).
+        Return the last five published questions.
+
+        (not including those set to be published in the future).
         """
         return Question.objects.filter(
             pub_date__lte=timezone.now()
@@ -55,10 +58,9 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'polls/detail.html'
 
     def get_queryset(self):
-        """
-        Excludes any questions that aren't published yet.
-        """
-        return Question.objects.filter(pub_date__lte=timezone.now())
+        """Excludes any questions that aren't published yet."""
+        return Question.objects.filter(
+            pub_date__lte=timezone.now())
 
     def get_context_data(self, **kwargs):
         """Apply is_published and can_vote methods."""
@@ -69,27 +71,40 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
         context['is_published'] = question.is_published()
         context['can_vote'] = question.can_vote()
 
-        user_vote = Vote.objects.filter(user=user, choice__question=question).first()
+        user_vote = Vote.objects.filter(
+            user=user,
+            choice__question=question).first()
         context['previous_choice'] = user_vote.choice if user_vote else None
 
         return context
 
     def get(self, request, *args, **kwargs):
-        """If you cannot get page at Question Index, get_object_or_404() will raise Http404 error.
-        If you got into questions you're not allowed to vote yet, you'll be redirected to index page."""
+        """
+        Return appropriate details page.
+
+        If you cannot get page at Question Index, it will raise Http404 error.
+        If you got into questions you're not allowed to vote yet,
+        you'll be redirected to index page.
+        """
         try:
             question = get_object_or_404(Question, pk=kwargs['pk'])
             if not question.is_published():
-                logger.debug(f"Poll '{question.question_text}' is not opened yet.")
-                messages.info(request, f"'{question.question_text}' poll is not opened yet.")
+                logger.debug(f"Poll '{question.question_text}' "
+                             f"is not opened yet.")
+                messages.info(request, f"'{question.question_text}' "
+                                       f"poll is not opened yet.")
                 return HttpResponseRedirect(reverse('polls:index'))
             if not question.can_vote():
-                logger.debug(f"Poll '{question.question_text}' is closed.")
-                messages.info(request, f"'{question.question_text}' poll is closed.")
+                logger.debug(f"Poll '{question.question_text}' "
+                             f"is closed.")
+                messages.info(request,
+                              f"'{question.question_text}' "
+                              f"poll is closed.")
                 return HttpResponseRedirect(reverse('polls:index'))
         except Http404:
             logger.error("Invalid page exception")
-            messages.error(request, "There is no Question with this ID")
+            messages.error(request,
+                           "There is no Question with this ID")
             return HttpResponseRedirect(reverse('polls:index'))
 
         return super().get(request, *args, **kwargs)
@@ -131,21 +146,29 @@ def vote(request, question_id):
             'question': question,
         })
 
-    existing_vote = Vote.objects.filter(user=user, choice__question=question).first()
+    existing_vote = Vote.objects.filter(
+        user=user,
+        choice__question=question).first()
     if existing_vote:
         if existing_vote.choice != selected_choice:
             existing_vote.delete()
-            current_vote = Vote.objects.create(user=user, choice=selected_choice)
+            current_vote = Vote.objects.create(
+                user=user,
+                choice=selected_choice)
             current_vote.save()
     else:
-        current_vote = Vote.objects.create(user=user, choice=selected_choice)
+        current_vote = Vote.objects.create(
+            user=user,
+            choice=selected_choice)
         current_vote.save()
         # Always return an HttpResponseRedirect
         # after successfully dealing
         # with POST data. This prevents data from
         # being posted twice if a user hits the Back button.
     logger.info(
-        f"{user.username} from {ip_addr} submits vote {selected_choice.choice_text} in {question.question_text}.")
+        f"{user.username} from {ip_addr} submits vote "
+        f"{selected_choice.choice_text} "
+        f"in {question.question_text}.")
     messages.success(request,
                      f"Your vote for '{question}' was successfully recorded.")
     return HttpResponseRedirect(

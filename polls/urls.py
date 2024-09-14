@@ -1,4 +1,4 @@
-"""Module for polls app urls"""
+"""Module for polls app urls."""
 
 from django.urls import path
 

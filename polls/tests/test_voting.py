@@ -1,4 +1,4 @@
-"""Unit test for voting"""
+"""Unit test for voting."""
 
 from django.test import TestCase
 from django.utils import timezone
@@ -11,7 +11,10 @@ class QuestionModelTests(TestCase):
 
     def test_can_vote_within_pub_and_end_date(self):
         """
-        can_vote() returns True for questions whose pub_date is in the past and end_date is in the future.
+        can_vote() returns True.
+
+        For questions whose pub_date is in the past
+        and end_date is in the future.
         """
         now = timezone.now()
         question = \
@@ -23,7 +26,9 @@ class QuestionModelTests(TestCase):
 
     def test_can_vote_with_future_pub_date(self):
         """
-        can_vote() returns False for questions whose pub_date is in the future.
+        can_vote() returns False.
+
+        For questions whose pub_date is in the future.
         """
         now = timezone.now()
         future_question = Question(pub_date=now + timezone.timedelta(days=1),
@@ -33,7 +38,9 @@ class QuestionModelTests(TestCase):
 
     def test_can_vote_with_no_end_date(self):
         """
-        can_vote() returns True for questions whose pub_date is in the past and end_date is None.
+        can_vote() returns True.
+
+        For questions whose pub_date is in the past and end_date is None.
         """
         now = timezone.now()
         no_end_date_question = \
@@ -43,7 +50,11 @@ class QuestionModelTests(TestCase):
         self.assertTrue(no_end_date_question.can_vote())
 
     def test_can_vote_with_past_end_date(self):
-        """can_vote() returns False for questions whose end_date is in the past."""
+        """
+        can_vote() returns False.
+
+        For questions whose end_date is in the past.
+        """
         now = timezone.now()
         past_question = \
             Question(
