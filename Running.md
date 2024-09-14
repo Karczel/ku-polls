@@ -16,15 +16,15 @@ localhost:8000
 Try Google Chrome or Brave.
 
 ## 3. Saving data
-To save your questions and choices:
+To save your questions and choices
 ```commandline
 python manage.py dumpdata --indent=2 -o data/polls-file-name.json polls.question polls.choice
 ```
-To save your votes:
+To save your votes
 ```commandline
 python manage.py dumpdata --indent=2 -o data/vote-file-name.json polls.vote
 ```
-To save your users:
+To save your users
 ```commandline
 python manage.py dumpdata --indent=2 -o data/users-file-name.json auth.user
 ```
@@ -32,7 +32,7 @@ python manage.py dumpdata --indent=2 -o data/users-file-name.json auth.user
 ## 4. Terminate the running application
 `Ctrl+C` to stop the running web application.
 If you've accidentally pressed `Ctrl+Z` and can't run the application again,
-follow these instructions:
+follow these instructions
 1. Type this in your terminal
 ```commandline
 lsof -i :8000
@@ -47,12 +47,12 @@ kill -9 <PID>
 or Searching the PID in your Activity Moniter, right click, and press Quit.
 
 ## 5. Exit virtual environment
-run this in your virtual environment:
+run this in your virtual environment
 ```commandline
 deactivate
 ```
 
-Existing demo users and passwords: <br>
+Existing demo users and passwords <br>
 
 |    Username     |    password     |
 |:---------------:|:---------------:|

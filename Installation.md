@@ -1,6 +1,6 @@
 # Installation Tutorial
 ## 1. Clone the repository
-Run this in your terminal:
+Run this in your terminal
 ```
 https://github.com/Karczel/ku-polls.git
 ```
@@ -13,11 +13,11 @@ cd ku-polls
 python -m venv myenv
 ```
 ## 4. Activate the Virtual environment
-For Mac/Linux:
+For Mac/Linux
 ```commandline
 source myenv/bin/activate
 ```
-For Windows:
+For Windows
 ```commandline
 .\myenv\Scripts\activate
 ```
@@ -29,15 +29,15 @@ pip install -r requirements.txt
 In the `sample.env` file, we have provided everything necessary to run the file,
 So you can duplicate and rename it to `.env`
 ### To create a .env file in terminal
-For Mac/Linux:
+For Mac/Linux
 ```commandline
 cp sample.env .env
 ```
-For windows:
+For windows
 ```commandline
 copy sample.env .env
 ```
-However, if you want to generate your own SECRET_KEY, here is how you could do it:
+However, if you want to generate your own SECRET_KEY, here is how you could do it
 ```commandline
 import secrets
 print(secrets.token_urlsafe(50))
