@@ -34,18 +34,31 @@ python manage.py dumpdata --indent=2 -o data/users-file-name.json auth.user
 If you've accidentally pressed `Ctrl+Z` and can't run the application again,
 follow these instructions
 1. Type this in your terminal
+For Mac/Linux <br>
+**sudo is added to execute the command with superuser(root) privileges**
 ```commandline
-lsof -i :8000
-//out put is the <PID>
+sudo lsof -i :8000
+//The second column of the output is the <PID>
 ```
-Then,
+Then replace <PID> in this code below and run,
 ```commandline
-kill <PID>
+sudo kill <PID>
 //or
-kill -9 <PID>
+sudo kill -9 <PID>
 ```
-or Searching the PID in your Activity Moniter, right click, and press Quit.
+or 
+Mac
+Searching the PID in your Activity Moniter, right click, and press Quit.
 
+For Windows <br>
+```commandline
+netstat -ano | findstr :8000
+//The last column is the <PID>
+```
+Then replace <PID> in this code below and run,
+```commandline
+taskkill /PID <PID> /F
+```
 ## 5. Exit virtual environment
 run this in your virtual environment
 ```commandline
