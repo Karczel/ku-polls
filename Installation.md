@@ -37,11 +37,11 @@ For windows
 ```commandline
 copy sample.env .env
 ```
-However, if you want to generate your own SECRET_KEY, here is how you could do it
+However, if you want to generate your own SECRET_KEY, here is how you can do it
 ```commandline
 import secrets
 print(secrets.token_urlsafe(50))
-//use the output result as your SECRET_KEY 
+//use the output result as your SECRET_KEY by replacing it in .env
 ```
 
 ## 7. Migrate
