@@ -9,10 +9,10 @@ type this in your web browser's URL bar
 ```commandline
 localhost:8000
 ```
-And you should be redirected to the polls index page
+### And you should be redirected to the polls index page
 <img width="925" alt="Screenshot 2567-09-14 at 17 58 26" src="https://github.com/user-attachments/assets/0410416c-5cb7-450d-beed-65f1957d7dfb">
 
-**!Caution** Some web browser may block the application due to security concerns (like Safari)
+**!Caution** Some web browser may block the application due to security concerns (like Safari) <br>
 Try Google Chrome or Brave.
 
 ## 3. Saving data
