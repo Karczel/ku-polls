@@ -1,5 +1,6 @@
 # Polls for Kasetsart University Students and Faculty
 [![Unit test](https://github.com/Karczel/ku-polls/actions/workflows/unittest.yml/badge.svg)](https://github.com/Karczel/ku-polls/actions/workflows/unittest.yml)
+[![Style - flake8](https://github.com/Karczel/ku-polls/actions/workflows/style.yml/badge.svg)](https://github.com/Karczel/ku-polls/actions/workflows/style.yml)
 
 An application to conduct online polls and surveys based
 on the [Django Tutorial project](https://docs.djangoproject.com/en/4.1/intro/tutorial01/), with
