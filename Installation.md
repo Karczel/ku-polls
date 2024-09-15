@@ -2,7 +2,7 @@
 ## 1. Clone the repository
 Run this in your terminal
 ```
-https://github.com/Karczel/ku-polls.git
+git clone https://github.com/Karczel/ku-polls.git
 ```
 ## 2. Navigate to the project directory
 ```commandline
