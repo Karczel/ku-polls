@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0005_delete_auditentry'),
+        ('polls',
+         '0005_delete_auditentry'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='question',
             name='end_date',
-            field=models.DateTimeField(blank=True, default=None, null=True, verbose_name='end date'),
+            field=models.DateTimeField(
+                blank=True,
+                default=None,
+                null=True,
+                verbose_name='end date'),
         ),
     ]

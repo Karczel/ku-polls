@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
+<div class="header-background">
 {% if user.is_authenticated %}
    Welcome back, {{ user.username }}
    <form action="{% url 'logout' %}" method="post">
@@ -18,12 +19,14 @@
         {% endfor %}
     </h2>
 {% endif %}
+</div>
 
 {% if latest_question_list %}
-    <ul style="list-style-type: none; padding: 0; margin: 0;">
+    <ul class="scrollable-container">
     {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
-            - <a href="{% url 'polls:results' question.id %}">Results</a>
+        <li class="box">
+            <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
+            <a href="{% url 'polls:results' question.id %}">Results</a>
         </li>
     {% endfor %}
     </ul>

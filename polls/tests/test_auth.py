@@ -1,18 +1,19 @@
-"""Tests of authentication."""
-import django.test
+"""Unit tests for user authentication."""
+from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate  # to "login" a user using code
+# from django.contrib.auth import authenticate  # to "login" a user using code
 from polls.models import Question, Choice
 from ku_polls import settings
 
 
-class UserAuthTest(django.test.TestCase):
+class UserAuthTest(TestCase):
     """Unit test to test authentication."""
 
     def setUp(self):
-        """creates a test user for unit test."""
-        # superclass setUp creates a Client object and initializes test database
+        """Set up the necessary variables for the unit test."""
+        # superclass setUp creates a Client object
+        # and initializes test database
         super().setUp()
         self.username = "testuser"
         self.password = "FatChance!"
@@ -43,14 +44,14 @@ class UserAuthTest(django.test.TestCase):
         logout_url = reverse("logout")
         # Authenticate the user.
         # We want to logout this user, so we need to associate the
-        # user user with a session.  Setting client.user = ... doesn't work.
+        # user with a session.  Setting client.user = ... doesn't work.
         # Use Client.login(username, password) to do that.
         # Client.login returns true on success
         self.assertTrue(
             self.client.login(username=self.username, password=self.password)
         )
         # visit the logout page
-        response = self.client.get(logout_url)
+        response = self.client.post(logout_url)
         self.assertEqual(302, response.status_code)
 
         # should redirect us to where? Polls index? Login?
@@ -88,10 +89,10 @@ class UserAuthTest(django.test.TestCase):
         form_data = {"choice": f"{choice.id}"}
         response = self.client.post(vote_url, form_data)
         # should be redirected to the login page
-        # self.assertEqual(response.status_code, 302)  # could be 303
+        self.assertEqual(response.status_code, 302)  # could be 303
         # this fails because reverse('login') does not include
         # the query parameter ?next=/polls/1/vote/
         # How to fix it?
-        self.assertRedirects(response, reverse('login'))
+        # self.assertRedirects(response, reverse('login'))
         login_with_next = f"{reverse('login')}?next={vote_url}"
         self.assertRedirects(response, login_with_next)

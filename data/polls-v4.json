@@ -1,0 +1,651 @@
+[
+{
+  "model": "polls.question",
+  "pk": 2,
+  "fields": {
+    "question_text": "What food are you allergic to?",
+    "pub_date": "2024-08-25T01:47:21Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 3,
+  "fields": {
+    "question_text": "Where do you usually spend your break time in KU?",
+    "pub_date": "2024-08-25T01:48:38Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 5,
+  "fields": {
+    "question_text": "What teaching style do you prefer?",
+    "pub_date": "2024-09-14T07:42:25.253Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 7,
+  "fields": {
+    "question_text": "What study medium do you rely on the most?",
+    "pub_date": "2024-09-14T07:58:02.910Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 8,
+  "fields": {
+    "question_text": "How many meals do you usually eat per day?",
+    "pub_date": "2024-09-14T08:07:04.735Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 9,
+  "fields": {
+    "question_text": "Which continent you're interested in studying abroad?",
+    "pub_date": "2024-09-14T08:09:06.012Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 10,
+  "fields": {
+    "question_text": "What is you primary mode of transportation to campus?",
+    "pub_date": "2024-09-14T08:10:59.410Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 11,
+  "fields": {
+    "question_text": "What is your most favourite game genre?",
+    "pub_date": "2024-09-14T08:13:42.188Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.question",
+  "pk": 12,
+  "fields": {
+    "question_text": "What method helps you study in preparation for exams the most?",
+    "pub_date": "2024-09-14T08:16:24.326Z",
+    "end_date": null
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 13,
+  "fields": {
+    "question": 2,
+    "choice_text": "Dairy"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 14,
+  "fields": {
+    "question": 2,
+    "choice_text": "Peanuts"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 15,
+  "fields": {
+    "question": 2,
+    "choice_text": "Seafood"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 16,
+  "fields": {
+    "question": 2,
+    "choice_text": "Egg"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 17,
+  "fields": {
+    "question": 2,
+    "choice_text": "Soy"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 18,
+  "fields": {
+    "question": 2,
+    "choice_text": "Wheat"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 19,
+  "fields": {
+    "question": 2,
+    "choice_text": "Sesame"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 20,
+  "fields": {
+    "question": 2,
+    "choice_text": "Fish"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 21,
+  "fields": {
+    "question": 2,
+    "choice_text": "Tree nuts, such as walnuts"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 22,
+  "fields": {
+    "question": 3,
+    "choice_text": "Stadium"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 23,
+  "fields": {
+    "question": 3,
+    "choice_text": "Chulabhorn Walailak Swimming Pool"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 24,
+  "fields": {
+    "question": 3,
+    "choice_text": "Kasetsart Engineering Fit & Firm (KEFF)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 25,
+  "fields": {
+    "question": 3,
+    "choice_text": "KU Health Fitness Center (Soon Keelah)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 26,
+  "fields": {
+    "question": 3,
+    "choice_text": "KU Happy Place Center"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 27,
+  "fields": {
+    "question": 3,
+    "choice_text": "KU Canteen 1 (Bar Mai gwa)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 28,
+  "fields": {
+    "question": 3,
+    "choice_text": "KU Canteen 2 (Bar Mai)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 29,
+  "fields": {
+    "question": 3,
+    "choice_text": "KU AVENUE"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 30,
+  "fields": {
+    "question": 3,
+    "choice_text": "The Office of Computer Services (OCS)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 31,
+  "fields": {
+    "question": 3,
+    "choice_text": "Other"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 33,
+  "fields": {
+    "question": 5,
+    "choice_text": "on site"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 34,
+  "fields": {
+    "question": 5,
+    "choice_text": "online"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 35,
+  "fields": {
+    "question": 5,
+    "choice_text": "both previous options"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 36,
+  "fields": {
+    "question": 7,
+    "choice_text": "pen and paper"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 37,
+  "fields": {
+    "question": 7,
+    "choice_text": "laptop"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 38,
+  "fields": {
+    "question": 7,
+    "choice_text": "tablet"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 39,
+  "fields": {
+    "question": 7,
+    "choice_text": "phone"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 40,
+  "fields": {
+    "question": 8,
+    "choice_text": "less than once a day on average."
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 41,
+  "fields": {
+    "question": 8,
+    "choice_text": "1"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 42,
+  "fields": {
+    "question": 8,
+    "choice_text": "2"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 43,
+  "fields": {
+    "question": 8,
+    "choice_text": "3"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 44,
+  "fields": {
+    "question": 8,
+    "choice_text": "more than 3 meals per day."
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 45,
+  "fields": {
+    "question": 9,
+    "choice_text": "Asia"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 46,
+  "fields": {
+    "question": 9,
+    "choice_text": "Europe"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 47,
+  "fields": {
+    "question": 9,
+    "choice_text": "Africa"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 48,
+  "fields": {
+    "question": 9,
+    "choice_text": "North America"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 49,
+  "fields": {
+    "question": 9,
+    "choice_text": "South America"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 50,
+  "fields": {
+    "question": 9,
+    "choice_text": "Artic"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 51,
+  "fields": {
+    "question": 9,
+    "choice_text": "Antarctic"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 52,
+  "fields": {
+    "question": 10,
+    "choice_text": "Car"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 53,
+  "fields": {
+    "question": 10,
+    "choice_text": "Bicycle"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 54,
+  "fields": {
+    "question": 10,
+    "choice_text": "Scooter"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 55,
+  "fields": {
+    "question": 10,
+    "choice_text": "Motorcycle"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 56,
+  "fields": {
+    "question": 10,
+    "choice_text": "Talai Bus (Campus Shuttle)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 57,
+  "fields": {
+    "question": 10,
+    "choice_text": "Train"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 58,
+  "fields": {
+    "question": 10,
+    "choice_text": "Walking"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 59,
+  "fields": {
+    "question": 10,
+    "choice_text": "Other"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 60,
+  "fields": {
+    "question": 11,
+    "choice_text": "Action/Adventure"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 61,
+  "fields": {
+    "question": 11,
+    "choice_text": "Role-Playing Games (RPGs)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 62,
+  "fields": {
+    "question": 11,
+    "choice_text": "Simulation"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 63,
+  "fields": {
+    "question": 11,
+    "choice_text": "First-Person Shooter (FPS)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 64,
+  "fields": {
+    "question": 11,
+    "choice_text": "Strategy"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 65,
+  "fields": {
+    "question": 11,
+    "choice_text": "Sports"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 66,
+  "fields": {
+    "question": 11,
+    "choice_text": "Puzzle"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 67,
+  "fields": {
+    "question": 11,
+    "choice_text": "Fighting"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 68,
+  "fields": {
+    "question": 11,
+    "choice_text": "Horror"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 69,
+  "fields": {
+    "question": 11,
+    "choice_text": "Tycoon"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 70,
+  "fields": {
+    "question": 11,
+    "choice_text": "Interactive storytelling"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 71,
+  "fields": {
+    "question": 11,
+    "choice_text": "Community Simulation"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 72,
+  "fields": {
+    "question": 11,
+    "choice_text": "Party game"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 73,
+  "fields": {
+    "question": 11,
+    "choice_text": "Board game"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 74,
+  "fields": {
+    "question": 11,
+    "choice_text": "Sandbox"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 75,
+  "fields": {
+    "question": 12,
+    "choice_text": "None"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 76,
+  "fields": {
+    "question": 12,
+    "choice_text": "Study Group"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 77,
+  "fields": {
+    "question": 12,
+    "choice_text": "Practice Tests"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 78,
+  "fields": {
+    "question": 12,
+    "choice_text": "Course materials"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 79,
+  "fields": {
+    "question": 12,
+    "choice_text": "Online resources (Excluding course materials)"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 80,
+  "fields": {
+    "question": 12,
+    "choice_text": "Flashcards"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 81,
+  "fields": {
+    "question": 12,
+    "choice_text": "Tutoring or Extra help from Teachers or TAs"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 82,
+  "fields": {
+    "question": 12,
+    "choice_text": "Notes and Summaries"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 83,
+  "fields": {
+    "question": 12,
+    "choice_text": "Educational Apps"
+  }
+},
+{
+  "model": "polls.choice",
+  "pk": 84,
+  "fields": {
+    "question": 12,
+    "choice_text": "AI Chatbots as a Study Assistant"
+  }
+}
+]

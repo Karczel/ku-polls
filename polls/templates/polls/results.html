@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
+<div class="header-background">
 {% if user.is_authenticated %}
    Welcome back, {{ user.username }}
    <form action="{% url 'logout' %}" method="post">
@@ -18,6 +19,7 @@
         {% endfor %}
     </h2>
 {% endif %}
+</div>
 
 <h1>{{ question.question_text }}</h1>
 
@@ -40,5 +42,6 @@
 
 
 <!--<a href="{% url 'polls:detail' question.id %}">Vote again?</a>-->
-
-<a href="{% url 'polls:index' %}">Back to List of Polls</a>
+<div class="custom-container">
+<a href="{% url 'polls:index' %}" class="custom-button-link">Back to List of Polls</a>
+</div>
