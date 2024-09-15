@@ -2,7 +2,7 @@
 ## 1. After you've finished the [Installation Tutorial](Installation.md)
 you can run the application; run this in your terminal
 ```
-python manage.py runserver
+python manage.py runserver --insecure
 ```
 ## 2. Use your web browser of choice
 type this in your web browser's URL bar
