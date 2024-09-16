@@ -1,0 +1,21 @@
+[run]
+# Ignore files in virtual environment and Python library
+omit =
+    */usr/*
+    */local/*
+    env/*
+    */lib/python*
+    */site-packages/*
+
+[report]
+# Exclude migration files, init files, mysite(changed name to ku_polls) files and manage.py
+omit =
+    */migrations/*
+    */ku_polls/*
+    */__init__.py
+    manage.py
+# Ignore __str__ and __repr__ methods from coverage
+exclude_lines =
+    def __str__
+    def __repr__
+
