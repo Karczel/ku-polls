@@ -30,6 +30,10 @@ jobs:
         SECRET_KEY=$(python -c "import secrets; print(secrets.token_urlsafe(50))")
         echo "SECRET_KEY=${SECRET_KEY}" >> .env
 
-    - name: Run Tests
+    - name: Run tests with coverage
       run: |
-        python manage.py test
+        coverage run --branch manage.py test
+
+    - name: Generate a coverage report
+      run: |
+        coverage report
