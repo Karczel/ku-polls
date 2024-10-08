@@ -138,7 +138,7 @@ def vote(request, question_id):
 
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (Choice.DoesNotExist):
+    except Choice.DoesNotExist:
         # Redisplay the question voting form. with an error message.
         logger.error(f"{user.username} from {ip_addr} didn't choose a vote")
         messages.error(request, "You didn't select a choice.")

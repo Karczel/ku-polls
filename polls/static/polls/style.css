@@ -116,21 +116,6 @@ tr:hover {
     background-color: #8c85f2;
 }
 
-.results-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.result-item {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.result-item:last-child {
-    border-bottom: none;
-}
-
 .highlight {
     color: blue;
     font-weight: bold;
