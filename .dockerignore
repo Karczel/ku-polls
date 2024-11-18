@@ -1,0 +1,7 @@
+.git
+.venv
+venv
+.github
+*.sh
+*.ps1
+__pycache__
