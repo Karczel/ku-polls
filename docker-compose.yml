@@ -1,3 +1,4 @@
+version: "3.9"
 services:
   db:
     image: "postgres:17"
@@ -12,9 +13,9 @@ services:
       retries: 5
     restart: always
     environment:
-      POSTGRES_USER: "${DB_USER?:DB_USER not set}"
-      POSTGRES_PASSWORD: "${DB_PWD?:DB_PWD not set}"
-      POSTGRES_DB: "polls"
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
     volumes:
       - ./db:/var/lib/postgresql/data
     deploy:
@@ -25,18 +26,11 @@ services:
     build:
       context: .
       args:
-        SECRET_KEY: "${SECRET_KEY?:SECRET_KEY not set}"
-    image: ku-polls
-    command:
-      - /bin/sh
-      - -c
-      - |
-        python manage.py migrate
-        python manage.py runserver 0.0.0.0:8000
+        SECRET_KEY: ${SECRET_KEY}
+    env_file: .env
     environment:
-      SECRET_KEY: "${SECRET_KEY?:SECRET_KEY not set}"
-      DATABASE_USERNAME: "${DB_USER?:DB_USER not set}"
-      DATABASE_PASSWORD: "${DB_PWD?:DB_PWD not set}"
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG}
       DATABASE_HOST: db
       DATABASE_PORT: 5432
     links:
